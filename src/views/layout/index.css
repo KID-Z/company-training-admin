@@ -1,0 +1,296 @@
+.home .content {
+  width: calc(100% - 240px);
+  height: calc(100% - 90px);
+  position: fixed;
+  top: 90px;
+  left: 240px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  transition: 0.3s width ease-in-out, 0.3s left ease-in-out, 0.3s right ease-in-out;
+}
+.home .content .header {
+  position: fixed;
+  top: 0;
+  width: calc(100% - 240px);
+  height: 100px;
+}
+.home .content.fold-content {
+  width: calc(100% - 64px);
+  height: calc(100% - 90px);
+  overflow-y: scroll;
+  position: fixed;
+  top: 90px;
+  left: 64px;
+}
+.home .content.fold-content .header {
+  position: fixed;
+  top: 0;
+  width: calc(100% - 64px);
+  height: 100px;
+}
+.home .content .header-nav {
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom: 1px solid #eee;
+}
+.home .content .header-nav .ant-breadcrumb {
+  display: inline-block;
+  margin-left: 17px;
+}
+.home .content .header-nav .user {
+  position: absolute;
+  right: 20px;
+  top: 0px;
+  z-index: 9;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+.home .content .header-nav .user .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+  background-repeat: space;
+  display: flex;
+}
+.home .content .header-nav .user .avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.home .content .header-nav .user .operation .user-name {
+  width: 50px;
+}
+.ant-popover-inner-content {
+  padding: 5px;
+  width: 80px;
+  text-align: center;
+}
+.test {
+  line-height: 30px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+}
+.test:nth-child(1) {
+  margin-bottom: 5px;
+}
+.test:hover {
+  background: orange;
+}
+.el-table__row {
+  font-size: 13px;
+}
+.el-menu {
+  border: none;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 240px;
+  height: calc(100% - 50px);
+  overflow: scroll;
+  position: fixed;
+  left: 0;
+  top: 50px;
+  z-index: 99;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) .menu-box {
+  display: flex;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) .menu-box .menu-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 17px;
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) .menu-box .menu-icon img {
+  width: 100%;
+  height: 100%;
+}
+.el-menu--collapse {
+  width: 64px;
+  height: calc(100% - 50px);
+  position: fixed;
+  left: 0;
+  top: 50px;
+  z-index: 99;
+}
+.el-menu--collapse .menu-box .menu-icon {
+  width: 20px;
+  height: 20px;
+}
+.el-menu--collapse .menu-box .menu-icon img {
+  width: 100%;
+  height: 100%;
+}
+.el-menu--inline,
+.el-menu-item {
+  background-color: #101117 !important;
+}
+.el-submenu__title,
+.el-submenu .el-menu-item {
+  color: rgba(255, 255, 255, 0.7);
+}
+.el-submenu .el-menu-item {
+  padding: 0;
+  min-width: auto;
+  padding-left: 0px !important;
+}
+.el-submenu .el-menu-item div {
+  padding-left: 70px;
+}
+.el-menu-item.is-active {
+  color: #409EFF;
+}
+.el-menu-item-group__title {
+  display: none;
+}
+.el-submenu__icon-arrow__none .el-submenu__icon-arrow {
+  display: none;
+}
+.el-menu--inline .router-link-exact-active,
+.el-submenu__title .router-link-exact-active {
+  color: #409EFF;
+}
+.menu-list-title {
+  width: 95%;
+  display: inline-block;
+}
+.el-menu--vertical {
+  left: 59px !important;
+}
+.el-menu--vertical .el-menu-item-group ul .el-menu-item {
+  padding: 0 !important;
+}
+.el-menu--vertical .el-menu-item-group ul .el-menu-item div {
+  padding-left: 50px;
+}
+.el-tabs__nav-scroll {
+  background-color: #fff;
+}
+.el-radio-button__inner {
+  width: 80px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+.el-radio-group {
+  min-width: 240px;
+  margin-right: 10px;
+}
+.el-tabs__nav-prev {
+  line-height: 30px;
+  margin-left: 4px;
+}
+.el-tabs__nav-next {
+  line-height: 30px;
+  margin-right: 4px;
+}
+.el-tabs--card > .el-tabs__header {
+  border: none;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__nav {
+  border: none;
+}
+.el-tabs__item {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  height: 26px;
+  line-height: 26px;
+  border: 1px solid #d8dce5;
+  color: #495060;
+  background: #fff;
+  padding: 0 8px !important;
+  font-size: 12px;
+  margin-left: 5px;
+  margin-top: 4px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.el-tabs__item::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: #fff;
+  margin-right: 3px;
+  display: none;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
+  border-color: #409EFF;
+  color: #fff;
+  background-color: #409EFF;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__item.is-active::before {
+  display: inline-block;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__item {
+  border-bottom-color: #d8dce5;
+  transition: none;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__item:first-child {
+  border-left: 1px solid #d8dce5;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__item .el-icon-close {
+  width: 14px;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__item.is-closable:hover {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.el-tabs--card > .el-tabs__header .el-tabs__item.is-active.is-closable {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.el-tabs__nav .is-top {
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+.is-focus {
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+.el-select:nth-of-type(1) {
+  margin-right: 10px;
+}
+.el-input--suffix .el-input__inner {
+  width: 121px;
+  height: 30px;
+  font-size: 13px;
+}
+.el-input__suffix {
+  display: flex;
+  align-items: center;
+}
+.el-drawer {
+  width: calc(100% - 240px) !important;
+}
+.hide-menu .el-drawer {
+  width: calc(100% - 64px) !important;
+}
+.el-date-editor .el-range-separator {
+  padding: 0;
+}
+.el-table .cell {
+  height: 40px;
+  line-height: 40px;
+  white-space: nowrap;
+}
+.el-drawer__header {
+  margin-bottom: 0;
+  padding-top: 10px;
+}
+.el-table td,
+.el-table th {
+  padding: 11.34px 0;
+}
+.el-table::before {
+  height: 0;
+}
