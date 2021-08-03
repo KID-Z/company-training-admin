@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-26 14:59:08
- * @LastEditTime: 2021-07-29 15:58:15
+ * @LastEditTime: 2021-08-02 15:06:36
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/api/course.js
@@ -77,5 +77,12 @@ export default {
   },
   courseClassificationAdd(data) {
     return axios.post(URLS.courseClassificationAdd, data);
+  },
+  QRCode(txt) {
+    return axios.post(URLS.QRCode, {
+      txt,
+    }, {
+      responseType: 'arraybuffer',
+    });
   },
 };

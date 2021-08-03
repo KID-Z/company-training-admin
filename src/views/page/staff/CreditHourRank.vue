@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-08 15:09:52
- * @LastEditTime: 2021-07-27 09:06:35
+ * @LastEditTime: 2021-08-02 13:32:56
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/views/page/CreditHourRank.vue
@@ -99,6 +99,7 @@ export default {
   },
   methods: {
     search() {
+      console.log(this.po, this.dept);
       const data = {
         current: 1,
         size: '10',
@@ -110,9 +111,9 @@ export default {
     },
     handleChange(value, type) {
       if (type === 'dept') {
-        this.dept = value[value.length - 1];
+        this.dept = value[value.length - 1] || '';
       } else if (type === 'po') {
-        this.po = value[value.length - 1];
+        this.po = value[value.length - 1] || '';
       }
     },
     getCreditHourRankList(data) {
@@ -147,7 +148,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .credit-hour-rank {
   margin-left: 10px;
   .search {

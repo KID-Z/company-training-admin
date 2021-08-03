@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-09 10:59:12
- * @LastEditTime: 2021-07-28 15:32:58
+ * @LastEditTime: 2021-08-02 13:34:33
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/views/page/course-manage/CourseComment.vue
@@ -132,7 +132,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .course-comment {
   margin-left: 10px;
   .search-course {

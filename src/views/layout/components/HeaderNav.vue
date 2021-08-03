@@ -24,8 +24,8 @@
       <div class="operation">
       <a-popover placement="bottom">
         <template slot="content">
-          <div class="test">个人中心</div>
-          <div class="test">退出</div>
+          <div class="user-li">个人中心</div>
+          <div class="user-li">退出</div>
         </template>
         <div class="user-name">白小纯</div>
       </a-popover>

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-09 14:08:50
- * @LastEditTime: 2021-07-29 17:50:32
+ * @LastEditTime: 2021-08-02 13:34:58
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/views/page/course-manage/courseCategory.vue
@@ -408,7 +408,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .course-category {
   .operation {
     display: flex;
@@ -443,9 +443,5 @@ export default {
       margin-left: 0 !important;
     }
   }
-}
-
-.el-drawer {
-  width: 410px !important;
 }
 </style>

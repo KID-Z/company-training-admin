@@ -1,14 +1,19 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-27 09:34:47
- * @LastEditTime: 2021-07-28 16:02:02
+ * @LastEditTime: 2021-08-02 14:15:03
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/components/Select/index.vue
 -->
 <template>
   <div class="select">
-    <el-select :value="value" :placeholder="placeholder" @change="change">
+    <el-select
+      :value="value"
+      :placeholder="placeholder"
+      @change="change"
+      :style="{ width: width + 'px' }"
+    >
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
       </el-option>
     </el-select>
@@ -18,6 +23,10 @@
 <script>
 export default {
   props: {
+    width: {
+      type: [String, Number],
+      default: 120,
+    },
     placeholder: {
       type: String,
     },

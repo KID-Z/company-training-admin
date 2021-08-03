@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-01 14:47:49
- * @LastEditTime: 2021-07-29 10:01:34
+ * @LastEditTime: 2021-08-02 15:11:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/axios.js
@@ -41,6 +41,7 @@ instance.interceptors.request.use((config) => {
     ...config,
     headers: {
       ...config.headers,
+      'Content-Type': 'application/json;charset=utf-8',
       Authorization: `Bearer ${store.state.user.token}`,
     },
   };
@@ -48,10 +49,12 @@ instance.interceptors.request.use((config) => {
 
 // 响应拦截器
 instance.interceptors.response.use((response) => {
-  if (response.data.code !== 200) {
-    throw new Error(response.data.msg);
+  if (response.data.code === 200) {
+    return response.data.data;
+  } if (response.config.url === '/api/training/courseList/getCode') {
+    return response.data;
   }
-  return response.data.data;
+  throw new Error(response.data.msg);
 }, (error) => {
   if (error.response) {
     // 响应错误 可以根据状态码返回对应的信息或提示
@@ -60,6 +63,10 @@ instance.interceptors.response.use((response) => {
         message: 'token失效了, 请重新登录',
       });
       removeSession();
+    } else if (error.response.status === 404) {
+      Message.error({
+        message: '服务器找不到指定的资源',
+      });
     }
   } else if (error.request) {
     // 请求错误

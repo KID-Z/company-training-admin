@@ -84,7 +84,7 @@
             <span>{{ scope.row.createTime }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="300" fixed="right">
+        <el-table-column label="操作" width="400" fixed="right">
           <template slot-scope="scope">
             <el-button size="mini" @click="updateState(scope.$index, scope.row)">{{
               scope.row.state === 1 ? "发布" : "撤销"
@@ -94,13 +94,16 @@
               >删除</el-button
             >
             <el-button size="mini" @click="viewDetails(scope.row)">课节管理</el-button>
+            <el-button v-if="scope.row.courseKind !== 1" size="mini" @click="QRCode(scope.row)"
+              >生成二维码</el-button
+            >
           </template>
         </el-table-column>
       </el-table>
     </div>
     <Loading />
     <Pagination />
-    <el-drawer title="添加课程" :visible.sync="drawer" append-to-body>
+    <el-drawer title="添加课程" :visible.sync="drawer" append-to-body custom-class="course-drawer">
       <div class="add-course">
         <el-form
           :model="editCourseData"
@@ -162,17 +165,6 @@
               </el-option>
             </el-select>
           </el-form-item>
-          <el-form-item
-            label="课节"
-            prop="classDay"
-            :rules="[{ required: true, message: '课节名称不能为空' }]"
-          >
-            <el-input
-              v-model.number="editCourseData.classDay"
-              autocomplete="off"
-              placeholder="请输入部门名称"
-            ></el-input>
-          </el-form-item>
           <el-form-item label="封面" prop="courseImage" class="upload-img">
             <a-upload
               action="/api/training/upload/upload"
@@ -214,6 +206,14 @@
         </el-form>
       </div>
     </el-drawer>
+    <el-dialog title="打印" :visible.sync="dialogTableVisible" append-to-body custom-class="QRCode">
+      <div class="QRCode-img">
+        <img id="QRCodeImg" :src="QRCodeUrl" />
+      </div>
+      <div class="print">
+        <el-button @click="saveImg('QRCodeImg')">打印</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
@@ -228,6 +228,8 @@ import Search from "@/components/Search/index.vue";
 import Loading from "@/components/Loading/index.vue";
 import course from "@/api/course";
 import tree from "@/api/tree";
+import html2canvas from "html2canvas";
+import print from "print-js";
 function getRandomStr() {
   return Math.random().toString(16).substr(2, 4);
 }
@@ -243,6 +245,7 @@ export default {
   },
   data() {
     return {
+      dialogTableVisible: false,
       classify: [],
       classifyValue: "",
       courseList: [],
@@ -279,9 +282,70 @@ export default {
         updateTime: "",
       },
       fileList: [],
+      QRCodeUrl: "",
     };
   },
   methods: {
+    saveImg(val) {
+      window.pageYoffset = 0;
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      // 先获取你要转换为img的dom节点
+      var node = document.getElementById(val); //传入的id名称
+      var width = node.offsetWidth; //dom宽
+      var height = node.offsetHeight; //dom高
+      var scale = 2; 
+      html2canvas(node, {
+        width: width,
+        heigth: height,
+        backgroundColor: "#ffffff", //背景颜色 为null是透明
+        dpi: window.devicePixelRatio * 2, //按屏幕像素比增加像素
+        scale: scale,
+        X: 0,
+        Y: 0,
+        scrollX: 0, //如果左边多个白边 设置该偏移-3 或者更多
+        scrollY: 0,
+        useCORS: true, //是否使用CORS从服务器加载图像 !!!
+        allowTaint: true, //是否允许跨域图像污染画布  !!!
+      }).then((canvas) => {
+        // console.log("canvas", canvas);
+        var url = canvas.toDataURL(); //这里上面不设值cors会报错
+        this.imgurl = url;
+        console.log(url);
+        setTimeout(() => {
+          // this.printDeal(val)
+          print({
+            printable: url,
+            type: "image",
+            base64: true,
+            header: "",
+            headerStyle: "text-align:center;color:#f00;width:100%;border:1px #000 solid;",
+            // targetStyles: ['border', 'padding: 15px'],
+            scanStyles: false,
+            style: "", // 表格样式
+          });
+        }, 100);
+        var a = document.createElement("a"); //创建一个a标签 用来下载
+        a.download = "1"; //设置下载的图片名称
+        var event = new MouseEvent("click"); //增加一个点击事件
+        a.href = url; //此处的url为base64格式的图片资源
+        a.dispatchEvent(event); //触发a的单击事件 即可完成下载
+      });
+    },
+    QRCode() {
+      course
+        .QRCode("1")
+        .then((res) => {
+          return (
+            "data:image/png;base64," +
+            btoa(new Uint8Array(res).reduce((data, byte) => data + String.fromCharCode(byte), ""))
+          );
+        })
+        .then((url) => {
+          this.QRCodeUrl = url;
+          this.dialogTableVisible = true;
+        });
+    },
     addCourse() {
       this.drawer = true;
       this.type = "add";
@@ -419,15 +483,14 @@ export default {
           for (let i = 0; i < original.length; i += 1) {
             const course = courseData[i];
             if (original[i][1] !== course[1]) {
-               if (course[0] === "classificationId") {
-                data[course[0]]  = course[1][course[1].length - 1];
+              if (course[0] === "classificationId") {
+                data[course[0]] = course[1][course[1].length - 1];
               } else {
                 data[course[0]] = course[1];
               }
             }
           }
-    
-        
+
           if (JSON.stringify(data) === "{}") {
             this.$message({
               type: "success",
@@ -439,6 +502,11 @@ export default {
           this.updateCourseInfo(data);
           this.drawer = false;
         } else {
+          this.editCourseData.classificationId = this.editCourseData
+            ? this.editCourseData.classificationId[
+                this.editCourseData.classificationId.length - 1
+              ] || ""
+            : "";
           course.add(this.editCourseData).then(
             () => {
               this.$message({
@@ -471,6 +539,7 @@ export default {
       this.previewVisible = false;
     },
     handleChangeCourseImage({ file, fileList }) {
+      console.log(file, fileList);
       if (file.status === "done") {
         if (fileList[0].response.code === 200) {
           this.editCourseData.courseImage = fileList[0].response.msg;
@@ -492,15 +561,9 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .course-list {
   margin-left: 10px;
-  .el-input {
-    width: 100px;
-  }
-  .el-input--suffix .el-input__inner {
-    width: 100%;
-  }
   .operation {
     display: flex;
     align-items: center;
@@ -538,10 +601,7 @@ export default {
     display: none;
   }
   .submit {
-    position: absolute;
-    left: 50%;
     margin-top: 20px;
-    transform: translateX(-50%);
     .el-form-item__content {
       margin-left: 0 !important;
     }
@@ -550,7 +610,17 @@ export default {
     width: 100%;
   }
 }
-.el-drawer {
-  width: 410px !important;
+.QRCode {
+  text-align: center;
+  .QRCode-img {
+    display: flex;
+    justify-content: center;
+    img {
+      width: 200px;
+    }
+  }
+.print {
+  text-align: center;
+}
 }
 </style>

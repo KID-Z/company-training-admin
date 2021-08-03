@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-14 13:54:51
- * @LastEditTime: 2021-07-14 13:57:54
+ * @LastEditTime: 2021-08-02 13:05:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/views/page/certificate/UploadCertificateImg.vue
@@ -138,10 +138,6 @@ export default {
     margin-left: 0 !important;
   }
 }
-}
-
-.el-drawer {
-  width: 410px !important;
 }
 
 </style>

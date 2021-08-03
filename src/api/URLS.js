@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-26 09:44:06
- * @LastEditTime: 2021-07-29 16:36:19
+ * @LastEditTime: 2021-08-03 10:20:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/api/URLs.js
@@ -35,9 +35,18 @@ export default {
   courseClassificationUpdate: '/api/training/courseClassification/update',
   courseClassificationDetails: '/api/training/courseClassification/getclassById',
   courseClassificationAdd: '/api/training/courseClassification/add',
+  QRCode: '/api/training/courseList/getCode',
+  // 试题
+  problemList: '/api/problemMain/selProblemListByParam',
+  questionsClassificationRemove: '/api/problemSet/delAll',
+  questionsClassificationDetails: '/api/problemSet/getProblemSetById',
+  questionsClassificationAdd: '/api/problemSet/add',
+  questionsClassificationUpdate: '/api/problemSet/update',
+  questionsAdd: '/api/problemMain/saveProblemVO',
   // 树
   deptTree: '/api/training/trainingDepartment/list',
   postTree: '/api/training/trainingPost/list',
   courseTree: '/api/training/courseClassification/getCourseTree',
+  questionsClassification: '/api/problemSet/getTableTree',
   courseClassificationTree: '/api/training/courseClassification/getCourseTree',
 };

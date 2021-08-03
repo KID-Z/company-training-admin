@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-12 16:32:56
- * @LastEditTime: 2021-07-14 09:27:51
+ * @LastEditTime: 2021-08-02 13:03:15
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/views/page/training/AddTraining.vue
@@ -409,9 +409,6 @@ export default {
   }
 }
 
-.el-drawer {
-  width: 410px !important;
-}
 .el-input--suffix .el-input__inner {
   width: 100%;
 }

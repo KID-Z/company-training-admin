@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2021-07-19 10:35:41
- * @LastEditTime: 2021-07-29 14:49:02
+ * @LastEditTime: 2021-07-30 10:27:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/api/tree.js
@@ -28,5 +28,10 @@ export default {
   },
   courseClassification(data) {
     return axios.post(URLS.courseClassificationTree, data);
+  },
+  questionsClassification(selString) {
+    return axios.post(URLS.questionsClassification, {
+      selString,
+    });
   },
 };

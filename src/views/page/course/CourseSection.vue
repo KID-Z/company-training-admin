@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-09 09:46:54
- * @LastEditTime: 2021-07-29 16:46:03
+ * @LastEditTime: 2021-08-02 13:34:13
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/views/page/course-manage/CourseManage.vue
@@ -96,7 +96,12 @@
       </el-table>
     </div>
     <Pagination />
-    <el-drawer title="添加课节" :visible.sync="drawer" append-to-body>
+    <el-drawer
+      title="添加课节"
+      :visible.sync="drawer"
+      append-to-body
+      custom-class="course-section-drawer"
+    >
       <div class="add-lessons">
         <el-form
           :model="editData"
@@ -253,7 +258,7 @@ export default {
     this.getCourseSectionList({
       current: "1",
       sectionName: "",
-      playType: '',
+      playType: "",
       courseId: this.$route.params.id,
     });
   },
@@ -264,17 +269,17 @@ export default {
   },
   methods: {
     getDateFormat(val) {
-        if (val < 60) {
-          return `${val}秒`;
+      if (val < 60) {
+        return `${val}秒`;
+      } else {
+        var min_total = Math.floor(val / 60); // 分钟
+        var sec = Math.floor(val % 60); // 余秒
+        if (min_total < 60) {
+          return `${min_total}分${sec}秒`;
         } else {
-          var min_total = Math.floor(val / 60); // 分钟
-          var sec = Math.floor(val % 60); // 余秒
-          if (min_total < 60) {
-            return `${min_total}分${sec}秒`;
-          } else {
-            return `${Math.floor(min_total / 60)}小时${Math.floor(min_total % 60)}分${sec}秒`;
-          }
+          return `${Math.floor(min_total / 60)}小时${Math.floor(min_total % 60)}分${sec}秒`;
         }
+      }
     },
     add() {
       this.drawer = true;
@@ -304,7 +309,7 @@ export default {
       try {
         this.editData = await course.courseSectionDetails({ id });
         const val = this.editData.duration;
-       if (val < 60) {
+        if (val < 60) {
           return val;
         } else {
           var min_total = Math.floor(val / 60); // 分钟
@@ -403,10 +408,10 @@ export default {
       this.$store.dispatch("layout/loadingState", true);
       course.courseSectionList(data).then((res) => {
         this.courseSectionList = res.list;
-        this.courseSectionList.map(item=>{
+        this.courseSectionList.map((item) => {
           item.duration = this.getDateFormat(item.duration);
           return item;
-        })
+        });
         this.total = res.total;
         this.$store.dispatch("layout/loadingState", false);
       });
@@ -495,7 +500,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .course-section {
   margin-left: 10px;
   .el-input--suffix .el-input__inner {
@@ -570,9 +575,5 @@ export default {
   .ant-upload-list-item-actions a {
     display: none;
   }
-}
-
-.el-drawer {
-  width: 410px !important;
 }
 </style>

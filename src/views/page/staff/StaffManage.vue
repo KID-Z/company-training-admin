@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-03 11:29:26
- * @LastEditTime: 2021-07-29 13:52:04
+ * @LastEditTime: 2021-08-02 14:08:20
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/views/page/PositionManage.vue
@@ -13,7 +13,12 @@
     <div class="operation">
       <div class="update-tabel">
         <div class="search-staff">
-          <Cascader @handleChange="handleChange" placeholder="部门" type="dept" :options="deptTree" />
+          <Cascader
+            @handleChange="handleChange"
+            placeholder="部门"
+            type="dept"
+            :options="deptTree"
+          />
           <Cascader @handleChange="handleChange" placeholder="岗位" type="po" :options="poTree" />
         </div>
         <Search @onSearch="searchText = $event" />
@@ -114,7 +119,11 @@
       </el-table>
     </div>
     <Pagination :current="currentPage" :total="total" @onChangePage="onPage" />
-    <EditStaffDrawer :editStaffId="editStaffId" @updateStaffData="updateStaffData" />
+    <EditStaffDrawer
+      :editStaffId="editStaffId"
+      :update="update"
+      @updateStaffData="updateStaffData"
+    />
     <ChooseStaffDrawer
       :hrStaff="hrStaff"
       :selected="selected"
@@ -181,6 +190,7 @@ export default {
   },
   data() {
     return {
+      update: Date.now(),
       state: '',
       searchText: '',
       dept: '',
@@ -285,9 +295,9 @@ export default {
     },
     handleChange(value, type) {
       if (type === 'dept') {
-        this.dept = value[value.length - 1];
+        this.dept = value[value.length - 1] || '';
       } else if (type === 'po') {
-        this.po = value[value.length - 1];
+        this.po = value[value.length - 1] || '';
       }
     },
     viewDetails() {
@@ -300,6 +310,7 @@ export default {
     },
     handleEdit(index, row) {
       this.$store.dispatch('staff/changeDrawer', true);
+      this.update = Date.now();
       this.editStaffId = row.id;
     },
     handleDelete(index, row) {
@@ -465,12 +476,9 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .staff-manage {
   margin-left: 10px;
-  .el-input {
-    width: 200px;
-  }
   .operation {
     display: flex;
     justify-content: space-between;

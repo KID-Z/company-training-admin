@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-09 10:58:15
- * @LastEditTime: 2021-07-28 15:32:41
+ * @LastEditTime: 2021-08-02 13:34:43
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/views/page/course-manage/CourseNotes.vue
@@ -131,7 +131,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .course-notes {
   margin-left: 10px;
   .search-staff {

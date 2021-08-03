@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-30 10:22:29
- * @LastEditTime: 2021-07-23 17:39:37
+ * @LastEditTime: 2021-08-02 13:43:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ljt-ats-base/src/components/ChooseStaffTable/index.vue
@@ -9,7 +9,7 @@
 <template>
   <div class="popover-container">
     <el-drawer
-      :class="{ 'hide-menu': $store.state.layout.collapsed }"
+      :class="{ 'menu-hr': true, 'hide-menu-hr': $store.state.layout.collapsed }"
       :visible="drawer"
       direction="rtl"
       @close="close"
@@ -280,10 +280,5 @@ export default {
   display: flex;
   justify-content: center;
   margin-top: 20px;
-}
-
-.staff-avatar {
-  width: 40px;
-  height: 40px;
 }
 </style>

@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2021-06-03 09:44:33
- * @LastEditTime: 2021-07-16 09:51:19
+ * @LastEditTime: 2021-08-02 13:48:53
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/views/Home.vue
@@ -55,4 +55,5 @@ export default {
 
 <style lang="less">
 @import url("./index.less");
+@import url("../../assets/css/element-ui.less");
 </style>

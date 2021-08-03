@@ -1,16 +1,17 @@
 <!--
  * @Author: your name
  * @Date: 2021-07-07 14:57:59
- * @LastEditTime: 2021-07-29 17:04:37
+ * @LastEditTime: 2021-08-02 13:36:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /company-training-admin/src/components/Drawer/index.vue
 -->
 
 <template>
-  <div class="add-staff-drawer">
+  <div>
     <el-drawer
       :visible="drawer"
+      custom-class="add-staff-drawer"
       title="编辑员工"
       direction="rtl"
       @open="open"
@@ -166,20 +167,25 @@ export default {
     editStaffId: {
       type: [String, Number],
     },
+    update: {
+      type: [String, Number],
+    },
   },
   watch: {
-    editStaffId(v) {
-      staff.edit(v).then((data) => {
+    update() {
+      staff.edit(this.editStaffId).then((data) => {
         this.staffData = data;
         this.staffData.departmentId = `${this.staffData.departmentId}`;
         this.staffData.positionId = `${this.staffData.positionId}`;
         if (this.staffData.photoUrl) {
-          this.fileList = [{
-            uid: getRandomStr(),
-            name: `${getRandomStr()}.png`,
-            status: "deon",
-            url: this.staffData.photoUrl,
-          }];
+          this.fileList = [
+            {
+              uid: getRandomStr(),
+              name: `${getRandomStr()}.png`,
+              status: "deon",
+              url: this.staffData.photoUrl,
+            },
+          ];
         }
         this.original = JSON.parse(JSON.stringify(data));
       });
@@ -217,7 +223,7 @@ export default {
             if (Array.isArray(staff[1])) {
               if (staff[0] === "departmentId") {
                 data.departmentId = staff[1][staff[1].length - 1];
-              } else if(staff[0] === "positionId") {
+              } else if (staff[0] === "positionId") {
                 data.positionId = staff[1][staff[1].length - 1];
               }
             } else {
@@ -253,7 +259,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .add-staff {
   padding-left: 50px;
   margin-top: 30px;
@@ -262,10 +268,7 @@ export default {
     height: 100px;
   }
   .submit {
-    position: absolute;
-    left: 50%;
     margin-top: 60px;
-    transform: translateX(-50%);
     .el-form-item__content {
       margin-left: 0 !important;
     }
@@ -287,10 +290,6 @@ export default {
   }
 }
 
-// Drawer
-.el-drawer {
-  width: 410px !important;
-}
 .el-input--suffix .el-input__inner {
   width: 100%;
 }
